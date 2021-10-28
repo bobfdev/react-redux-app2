@@ -10,7 +10,7 @@ import { sendCartData, fetchCartData } from './store/cart-actions';
 let isInitial = true;
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const showCart = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
@@ -19,21 +19,24 @@ function App() {
     dispatch(fetchCartData());
   }, [dispatch]);
 
+
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
-
+    
     if (cart.changed) {
       dispatch(sendCartData(cart));
     }
   }, [cart, dispatch]);
 
+  
+
   return (
     <Fragment>
       {notification && (
-        <Notification
+        <Notification 
           status={notification.status}
           title={notification.title}
           message={notification.message}
